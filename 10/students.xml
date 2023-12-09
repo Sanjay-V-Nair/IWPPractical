@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<student_details xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="students.xsd">
+
+    <student registration_number="123">
+        <name>
+            <first_name>John</first_name>
+            <last_name>Doe</last_name>
+        </name>
+        <department>Computer Science</department>
+        <address>123 Main Street, City</address>
+        <phone_number>987-6543</phone_number>
+    </student>
+
+    <student registration_number="456">
+        <name>
+            <first_name>Jane</first_name>
+            <last_name>Smith</last_name>
+        </name>
+        <department>Electrical Engineering</department>
+        <address>456 Oak Avenue, Town</address>
+        <phone_number>123-7890</phone_number>
+    </student>
+
+</student_details>
