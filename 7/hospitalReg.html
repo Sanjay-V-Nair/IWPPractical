@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Registration Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hospital Registration Form</h1>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" required>
+        <small>Format: 1234567890</small>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function validateForm() {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const dob = document.getElementById('dob').value;
+
+            if (!isValidName(fullName) || !isValidEmail(email) || !isValidPhoneNumber(phoneNumber) || !isValidDate(dob)) {
+                return false;
+            }
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `<p>Registration successful!</p>`;
+            return false; // Prevent form submission for this example
+        }
+
+        function isValidName(name) {
+            // Simple validation: Ensure the name contains only letters and spaces
+            return /^[a-zA-Z\s]+$/.test(name);
+        }
+
+        function isValidEmail(email) {
+            // Simple validation: Ensure the email follows a basic pattern
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function isValidPhoneNumber(phoneNumber) {
+            // Simple validation: Ensure the phone number is 10 digits
+            return /^\d{10}$/.test(phoneNumber);
+        }
+
+        function isValidDate(date) {
+            // Simple validation: Ensure the date is in the format YYYY-MM-DD
+            return /^\d{4}-\d{2}-\d{2}$/.test(date);
+        }
+    </script>
+</body>
+
+</html>
