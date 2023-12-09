@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tic-Tac-Toe Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(./tictactoe.jpg);
+            color: white;
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            grid-gap: 1px;
+            margin: 20px auto;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #333;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Tic-Tac-Toe Game</h1>
+    <div id="game-board"></div>
+    <button onclick="resetGame()">Reset Game</button>
+
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        let gameState = [];
+        let currentPlayer = 'X';
+
+        function createBoard() {
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.setAttribute('id', `cell-${i}`);
+                cell.setAttribute('onclick', `makeMove(${i})`);
+                gameBoard.appendChild(cell);
+            }
+        }
+
+        function makeMove(cellId) {
+            if (gameState[cellId] || checkWin()) {
+                return;
+            }
+
+            gameState[cellId] = currentPlayer;
+            document.getElementById(`cell-${cellId}`).textContent = currentPlayer;
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+
+        function checkWin() {
+            for (const combination of winningCombinations) {
+                const [a, b, c] = combination;
+                if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                    alert(`Player ${gameState[a]} wins!`);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function resetGame() {
+            gameState = [];
+            currentPlayer = 'X';
+            gameBoard.innerHTML = '';
+            createBoard();
+        }
+
+        createBoard();
+    </script>
+
+</body>
+
+</html>
