@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #example-image {
+            max-width: 100%;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Alphabet Chart</h1>
+
+    <img src="alphabet_chart.jpg" alt="Alphabet Chart" usemap="#alphabetMap" id="alphabetImage">
+
+    <map name="alphabetMap">
+        <!-- Define areas for each alphabet with corresponding coordinates -->
+        <area shape="rect" coords="125,411,310,637" alt="A" onclick="displayExample('A')">
+        <area shape="rect" coords="70,10,120,60" alt="B" onclick="displayExample('B')">
+        <!-- Add more areas for other alphabets as needed -->
+    </map>
+    <img src="" alt="Example Image" id="example-image">
+
+    <script>
+        function displayExample(alphabet) {
+            // Set the source of the example image based on the clicked alphabet
+            document.getElementById('example-image').src = 'example_' + alphabet + '.jpg';
+            // Show the example image
+            document.getElementById('example-image').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
