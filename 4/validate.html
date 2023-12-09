@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISBN Validator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-image: url(./isbn.jpg);
+            background-size: cover;
+            color: white;
+            text-shadow: 2px 2px 2px black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ISBN Validator</h1>
+    <form id="isbnForm">
+        <label for="isbn">Enter ISBN:</label>
+        <input type="text" id="isbn" name="isbn" required>
+        <button type="button" onclick="validateISBN()">Validate ISBN</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function validateISBN() {
+            const isbnInput = document.getElementById('isbn').value;
+            const isValid = validateISBNFormat(isbnInput);
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = isValid ? 'The ISBN is valid.' : 'Invalid ISBN. Please enter a valid ISBN.';
+        }
+
+        function validateISBNFormat(isbn) {
+            const cleanedISBN = isbn.replace(/[-\s]/g, '');
+
+            if (/^\d{13}$/.test(cleanedISBN)) {
+                let sum = 0;
+                for (let i = 0; i < 12; i++) {
+                    sum += parseInt(cleanedISBN[i]) * (i % 2 === 0 ? 1 : 3);
+                }
+                const checkDigit = (10 - (sum % 10)) % 10;
+
+                return parseInt(cleanedISBN[12]) === checkDigit;
+            }
+
+            return false;
+        }
+    </script>
+</body>
+
+</html>
