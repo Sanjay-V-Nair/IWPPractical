@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Transposer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #matrixInput {
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Matrix Transposer</h1>
+    <div id="matrixInput">
+        <label for="rows">Enter the number of rows:</label>
+        <input type="number" id="rows" min="1" required>
+
+        <label for="columns">Enter the number of columns:</label>
+        <input type="number" id="columns" min="1" required>
+
+        <button onclick="getMatrix()">Enter Matrix Elements</button>
+    </div>
+
+    <div id="matrixElements" style="display: none;">
+        <h3>Enter Matrix Elements:</h3>
+        <div id="matrixInputs"></div>
+        <button onclick="transposeMatrix()">Transpose</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function getMatrix() {
+            const rows = parseInt(document.getElementById('rows').value);
+            const columns = parseInt(document.getElementById('columns').value);
+
+            const matrixInputs = document.getElementById('matrixInputs');
+            matrixInputs.innerHTML = '';
+
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < columns; j++) {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.placeholder = `Enter element at position (${i + 1}, ${j + 1})`;
+                    input.id = `element_${i}_${j}`;
+                    matrixInputs.appendChild(input);
+                }
+                matrixInputs.appendChild(document.createElement('br'));
+            }
+
+            document.getElementById('matrixInput').style.display = 'none';
+            document.getElementById('matrixElements').style.display = 'block';
+        }
+
+        function transposeMatrix() {
+            const rows = parseInt(document.getElementById('rows').value);
+            const columns = parseInt(document.getElementById('columns').value);
+
+            let matrix = [];
+            for (let i = 0; i < rows; i++) {
+                let row = [];
+                for (let j = 0; j < columns; j++) {
+                    const element = parseFloat(document.getElementById(`element_${i}_${j}`).value);
+                    row.push(element);
+                }
+                matrix.push(row);
+            }
+
+            const transposedMatrix = transpose(matrix);
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = '<h3>Transposed Matrix:</h3>';
+            resultElement.innerHTML += '<pre>' + matrixToString(transposedMatrix) + '</pre>';
+        }
+
+        function transpose(matrix) {
+            return matrix[0].map((col, i) => matrix.map(row => row[i]));
+        }
+
+        function matrixToString(matrix) {
+            return matrix.map(row => row.join('\t')).join('\n');
+        }
+    </script>
+</body>
+
+</html>
