@@ -25,20 +25,13 @@
 
     <map name="alphabetMap">
         <!-- Define areas for each alphabet with corresponding coordinates -->
-        <area shape="rect" coords="125,411,310,637" alt="A" onclick="displayExample('A')">
-        <area shape="rect" coords="70,10,120,60" alt="B" onclick="displayExample('B')">
+        <area shape="rect" coords="43,132,97,207" alt="A" href="example_A.jpg">
+        <area shape="rect" coords="111,132,165,207" alt="B" href="example_B.jpg">
+
         <!-- Add more areas for other alphabets as needed -->
     </map>
     <img src="" alt="Example Image" id="example-image">
 
-    <script>
-        function displayExample(alphabet) {
-            // Set the source of the example image based on the clicked alphabet
-            document.getElementById('example-image').src = 'example_' + alphabet + '.jpg';
-            // Show the example image
-            document.getElementById('example-image').style.display = 'block';
-        }
-    </script>
 </body>
 
 </html>
